@@ -1,0 +1,300 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 0
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 1
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 500
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 2
+    m_PVRDenoiserTypeDirect: 0
+    m_PVRDenoiserTypeIndirect: 0
+    m_PVRDenoiserTypeAO: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 0
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: c95e2314020e7c94785bcfddc08127a8,
+    type: 2}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &1011435551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011435552}
+  - component: {fileID: 1011435553}
+  m_Layer: 0
+  m_Name: Code Editor Example
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1011435552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011435551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1011435553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011435551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c766635a54c53f04bb9c44ec51ebbeea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  code: "using System.IO;\r\nusing System.Linq;\r\nusing System;\r\nusing Ardenfall.UnityCodeEditor;\r\nusing
+    MyBox;\r\nusing OpenAI.AiModels;\r\nusing TP.ExtensionMethods;\r\nusing UnityEditor;\r\nusing
+    UnityEngine;\r\nusing UnityEngine.Networking;\r\nusing CodeEditor = Ardenfall.UnityCodeEditor.CodeEditor;\r\n\r\nnamespace
+    OpenAi\r\n{\r\n    [CustomEditor(typeof(OpenAiComponent))]\r\n    public class
+    OpenAiComponentEditor : EditorWidowOrInspector<OpenAiComponentEditor>\r\n   
+    {\r\n        private OpenAiComponent openAiComponent;\r\n        private float
+    activeWidth = 0;\r\n        private CodeEditor codeEditor;\r\n        \r\n       
+    [SerializeField] private bool[] foldoutStates = new bool[] { };\r\n        private
+    static bool scriptsDirty = false; \r\n        \r\n        public override void
+    OnInspectorGUI()\r\n        {\r\n            openAiComponent = target as OpenAiComponent;\r\n\r\n           
+    if (Screen.width < 500 || !IsPrefab(openAiComponent))\r\n            {\r\n               
+    NarrowLayout();\r\n            }\r\n            else\r\n            {\r\n               
+    WideLayout();   \r\n            }\r\n        }\r\n        \r\n        void NarrowLayout()\r\n       
+    {\r\n            activeWidth = Screen.width - 25;\r\n            DrawGroup1();\r\n       
+    }\r\n\r\n        void WideLayout()\r\n        {\r\n            activeWidth =
+    Screen.width / 2f - 35;\r\n            EditorGUIUtility.labelWidth = Screen.width
+    / 5;\r\n            AiEditorUtils.Horizontal(() => {\r\n                AiEditorUtils.Vertical(()
+    => {\r\n                    DrawGroup1();\r\n                }, GUILayout.Width(activeWidth));\r\n               
+    GUILayout.Space(20);\r\n                AiEditorUtils.Vertical(() => {\r\n                   
+    DrawGroup2();\r\n                }, GUILayout.Width(activeWidth));\r\n           
+    });\r\n        }\r\n        \r\n        void DrawGroup1()\r\n        {\r\n           
+    AddNewScript(openAiComponent);\r\n            \r\n            var property =
+    serializedObject.GetIterator();\r\n            var expanded = true;\r\n           
+    while (property.NextVisible(expanded))\r\n            {\r\n                //
+    Don't draw script field for built-in types\r\n                if (\"prompt\"
+    == property.propertyPath)\r\n                {\r\n                    EditorGUILayout.LabelField(\"Prompt\");\r\n                   
+    EditorStyles.textField.wordWrap = true;\r\n                    string updatedPrompt
+    = EditorGUILayout.TextArea(openAiComponent.prompt);\r\n\r\n                   
+    if (!openAiComponent.CanEdit)\r\n                    {\r\n                       
+    openAiComponent.prompt = updatedPrompt;\r\n                    }\r\n               
+    }\r\n                else if (\"m_Script\" == property.propertyPath)\r\n               
+    {\r\n                    AiEditorUtils.Disable(true, () =>\r\n                   
+    {\r\n                        EditorGUILayout.PropertyField(property);\r\n                   
+    });\r\n                }\r\n                else\r\n                {\r\n                   
+    EditorGUILayout.PropertyField(property, expanded);\r\n                    serializedObject.ApplyModifiedProperties();\r\n               
+    }\r\n\r\n                expanded = false;\r\n            }\r\n            \r\n           
+    if (!openAiComponent.CanEdit)\r\n            {\r\n                if (GUILayout.Button(\"Create
+    Component\"))\r\n                {\r\n                    if (!AiEditorUtils.ApiKeyPromptCheck())\r\n                   
+    {\r\n                        openAiComponent.CreateComponent(() =>\r\n                       
+    {\r\n                            EditorUtility.SetDirty(this);\r\n                       
+    });\r\n                        GUI.FocusControl(\"\");\r\n                   
+    }\r\n                }\r\n            }\r\n            else\r\n            {\r\n               
+    if (openAiComponent.scriptInstance)\r\n                {\r\n                   
+    EditorGUILayout.LabelField(\"Edits:\");\r\n                    OpenAiMonoBehaviour.Edit[]
+    edits = openAiComponent.scriptInstance.editsArray.edits;\r\n                   
+    while (foldoutStates.Length < edits.Length)\r\n                    {\r\n                       
+    foldoutStates = foldoutStates.Append(false).ToArray();\r\n                   
+    }\r\n\r\n                    while (foldoutStates.Length > edits.Length)\r\n                   
+    {\r\n                        foldoutStates = foldoutStates.RemoveLast<bool>();\r\n                   
+    }\r\n\r\n                    for (var index = 0; index < edits.Length; index++)\r\n                   
+    {\r\n                        var edit = openAiComponent.scriptInstance.editsArray.edits[index];\r\n\r\n                       
+    int averageCharacterWidth = 7;\r\n                        int characterLimit
+    = (int)(activeWidth / averageCharacterWidth);\r\n                        string
+    foldoutName = edit.editPrompt;\r\n                        foldoutName = foldoutName.Length
+    <= characterLimit ? \r\n                            foldoutName : \r\n                           
+    foldoutName.Substring(0, characterLimit) + \"...\";\r\n                       
+    foldoutStates[index] = AiEditorUtils.Foldout(foldoutStates[index], foldoutName,
+    () =>\r\n                        {\r\n                            EditorGUILayout.TextField(\"script\",
+    edit.script);\r\n                            EditorGUILayout.TextField(\"editPrompt\",
+    edit.editPrompt);\r\n                            EditorGUILayout.TextField(\"editedScript\",
+    edit.editedScript);\r\n                        });\r\n                    }\r\n               
+    }\r\n\r\n                AiEditorUtils.Disable(openAiComponent.editPrompt.IsNullOrEmpty(),
+    () =>\r\n                {\r\n                    if (GUILayout.Button(\"Create
+    Edit\"))\r\n                    {\r\n                        if (!AiEditorUtils.ApiKeyPromptCheck())\r\n                       
+    {\r\n                            CreateEdit(openAiComponent);\r\n                           
+    GUI.FocusControl(\"\");\r\n                        }\r\n                    }\r\n               
+    });\r\n            }\r\n        }\r\n\r\n        void DrawGroup2()\r\n       
+    {\r\n            EditorGUILayout.HelpBox(\r\n                \"This script generator
+    is for experimental purposes only and should not be used in production \" +\r\n               
+    \"environments. When using this it's a good idea to backup often.\",\r\n               
+    MessageType.Info\r\n            );\r\n            // AiEditorUtils.Disable(true,
+    () => {\r\n                EditorGUILayout.LabelField(\"Code\");\r\n               
+    EditorStyles.textField.wordWrap = true;\r\n                if (openAiComponent.script)\r\n               
+    {\r\n                    // EditorGUILayout.TextArea(openAiComponent.script.text);\r\n                   
+    \r\n                    // if (codeEditor == null)\r\n                    //
+    {\r\n                    //     codeEditor = new CodeEditor(\"CodeEditor\", new
+    DefaultTheme());\r\n                    // }\r\n                    // codeEditor.Draw(openAiComponent.script.text,
+    new GUIStyle(EditorStyles.wordWrappedLabel));\r\n                    // codeEditor.Update(openAiComponent.script.text);\r\n                   
+    \r\n                    \r\n                }\r\n                else\r\n               
+    {\r\n                    EditorGUILayout.TextArea(\"Enter a prompt and click
+    'Create Component.' This can also be attached to any GameObject!\");\r\n               
+    }\r\n            // });\r\n        }\r\n\r\n        private async void CreateEdit(OpenAiComponent
+    openAiComponent)\r\n        {\r\n            OpenAiApi openAi = new OpenAiApi();\r\n\r\n           
+    string scriptName = openAiComponent.script.name.Replace(\".cs\", \"\");\r\n           
+    \r\n            // string postPromptWithVars = openAiComponent.postPrompt\r\n           
+    //     .Replace(\"{unity_version}\", Application.unityVersion)\r\n           
+    //     .Replace(\"{script_name}\", scriptName);\r\n            \r\n           
+    string fullPrompt = \r\n                // openAiComponent.prePrompt + \" \"
+    + openAiComponent.prompt + \" \" + postPromptWithVars + \"\\n\" + \r\n               
+    openAiComponent.editPrePrompt + \" '\" + openAiComponent.editPrompt + \"' \"
+    + openAiComponent.editPostPrompt + \"\\n\\n\" + \r\n                openAiComponent.script.text
+    + \"\\n\\n\\n Respond with the full the script and not just the edit. \";\r\n\r\n           
+    var request = new AiTextRequest{prompt=fullPrompt, model=Models.Text.TEXT_DAVINCI_003,
+    max_tokens=2048};\r\n            var codeCompletion = await openAi.Send(request);\r\n\r\n           
+    if (codeCompletion.Result == UnityWebRequest.Result.Success)\r\n            {\r\n               
+    string scriptContents = codeCompletion.Text.Trim();\r\n                string
+    directory = Path.GetDirectoryName(AssetDatabase.GetAssetPath(openAiComponent.script));\r\n\r\n               
+    AiUtils.Script.CreateScript(scriptName, scriptContents, false, directory, true);\r\n               
+    \r\n                AssetDatabase.Refresh();\r\n                \r\n               
+    string script = openAiComponent.script.text;\r\n                string editPrompt
+    = openAiComponent.editPrompt;\r\n                string editedScript = scriptContents;\r\n\r\n               
+    if (openAiComponent.scriptInstance)\r\n                {\r\n                   
+    openAiComponent.scriptInstance.CreateEdit(script, editPrompt, editedScript);\r\n                   
+    openAiComponent.editPrompt = \"\";\r\n                }\r\n            }\r\n       
+    }\r\n\r\n        private static void AddNewScript(OpenAiComponent openAiComponent)\r\n       
+    {\r\n            if (scriptsDirty && (openAiComponent.addOnReload == \"\" ||
+    openAiComponent.script == default))\r\n            {\r\n                scriptsDirty
+    = false;\r\n            }\r\n\r\n            if (openAiComponent.addOnReload
+    != \"\" && scriptsDirty)\r\n            {\r\n                Type type = openAiComponent.script.GetClass();\r\n               
+    openAiComponent.addOnReload = \"\";\r\n                scriptsDirty = false;\r\n               
+    if (type != null)\r\n                {\r\n                    if (openAiComponent.useOpenAiMonoBehaviour)\r\n                   
+    {\r\n                        if (!IsPrefab(openAiComponent))\r\n                       
+    {\r\n                            openAiComponent.scriptInstance = openAiComponent.gameObject.AddComponent(type)
+    as OpenAiMonoBehaviour;\r\n                        }\r\n                       
+    else\r\n                        {\r\n                            openAiComponent.gameObject.GetComponent<OpenAiMonoBehaviour>().BlowUp();;\r\n                           
+    openAiComponent.scriptInstance = openAiComponent.gameObject.AddComponent<OpenAiMonoBehaviour>();\r\n                       
+    }\r\n                    }\r\n                    else\r\n                   
+    {\r\n\r\n                        if (!IsPrefab(openAiComponent))\r\n                       
+    {\r\n                            openAiComponent.gameObject.AddComponent(type);\r\n                       
+    }\r\n                        else\r\n                        {\r\n                           
+    openAiComponent.gameObject.GetComponent<OpenAiMonoBehaviour>().BlowUp();;\r\n                           
+    openAiComponent.gameObject.AddComponent<OpenAiMonoBehaviour>();\r\n                       
+    }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n       
+    \r\n        private static bool IsPrefab(OpenAiComponent openAiComponent)\r\n       
+    {\r\n            bool isPrefab = openAiComponent.gameObject != null && (\r\n               
+    openAiComponent.gameObject.scene.name == null ||\r\n                openAiComponent.gameObject.gameObject
+    != null &&\r\n                openAiComponent.gameObject.gameObject.scene.name
+    == null\r\n            );\r\n            return isPrefab;\r\n        }\r\n       
+    \r\n        [UnityEditor.Callbacks.DidReloadScripts]\r\n        private static
+    void OnScriptsReloaded()\r\n        {\r\n            scriptsDirty = true;\r\n       
+    }\r\n        \r\n    }\r\n}"
