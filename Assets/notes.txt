@@ -1,0 +1,60 @@
+notes.txt
+
+-> Problem: When we select a piece, we need to constrain its behavior based on the type of piece it is.
+
+    -> State?
+        -> Upon picking up a piece, we could transition to different states:
+            -> PieceControllerStateMachine
+                -> Active
+                    -> Bishop
+                    -> Queen
+                    -> King
+                    -> Rook
+                    -> Knight
+                    -> Pawn
+                        -> Inactive
+
+                IPieceState:
+                    -> BishopState
+                    -> QueenState
+                    -> KingState
+                    -> RookState
+                    -> KnightState
+                    -> PawnState
+
+                -> IPieceState()
+                    -> validateMove(int index)
+                        // Here we can query whether or not there is a piece on the requested index.
+                        // We will also need to iterate through all possible moves to determine if there is a piece blocking the path for sliding pieces.
+                        
+                        -> capturePiece();
+                            // Here we will update the ChessData matrix with replacement to create capture
+                            // This will also adjust the score? Maybe this justifies having both
+                        -> placePiece();
+                            // Here we will simply replace blank spaces with our selected piece.
+                            
+                How do we handle individual piece movements if we aren't using class instantiations for the piece itself?
+                    -> We have a state that can support general piece movements, but for a pawn specifically we need to know if this is the first time the pawn is moving.
+                        -> If this is the pawn's first move of the game, we can allow it to move 2 spaces.
+                        -> If an enemy pawn is attacking one of the 2 spaces, it can capture the friendly pawn "in passing", moving to the space it was attacking.
+                    -> We need to know the castle status of the kings as well.
+                        -> castling requires:
+                            -> the spaces between the king and the respective rook to be empty.
+                            -> the spaces between the king and the respective rook cannot be under attack (inclusive of king and rook spaces)
+                            -> the king cannot have moved yet.
+                            -> the target friendly rook cannot have moved yet.
+
+                            -> We could use a "special move byte"
+                                -> If piece is a:
+                                    -> Pawn
+                                    -> King
+                                   We can add an extra byte to our datagram to indicate whether or not the unit has used up its special move
+                                    -> This byte could simply track if a piece has moved before:
+                                        -> This would be useful since we need to know if the King OR Rook have moved for the sake of castling
+                                        -> Both castling and fast pawn moves require that the piece has not moved yet.
+                                            -> Current datagram:
+                                                
+                                    
+
+
+                

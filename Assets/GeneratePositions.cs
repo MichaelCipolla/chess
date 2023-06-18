@@ -33,8 +33,11 @@ public class GeneratePositions : MonoBehaviour
     public Sprite blackRook;
     public Sprite blackBishop;
 
+    public ChessBoard chessBoardData;
+
     private void Start()
     {
+        this.chessBoardData = new ChessBoard(chessBoard);
         //chessData = new ChessPositions();
         PlacePieces();
     }
@@ -106,13 +109,13 @@ public class GeneratePositions : MonoBehaviour
         Vector2 newScale = newSpriteRenderer.transform.localScale * scale;
         newSpriteRenderer.transform.localScale = newScale;
         newPiece.transform.position = new Vector2(firstQuad.transform.position.x + (currentQuad % 8), firstQuad.transform.position.y + currentRank);
-        ChessData.setPieceData(currentQuad, currentPieceDatagram, isWhite);
+        ChessData.initializePieceData(currentQuad, currentPieceDatagram, isWhite);
         currentQuad++;
 
         newPiece.AddComponent<BoxCollider>();
         newPiece.AddComponent<DragAndDrop>();
         DragAndDrop movementScript = newPiece.GetComponent<DragAndDrop>();
-        movementScript.chessBoard = chessBoard;
+        movementScript.chessBoard = chessBoardData;
         return currentQuad;
     }
 }

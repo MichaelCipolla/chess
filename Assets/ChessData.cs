@@ -12,6 +12,7 @@ public enum ChessPieceData
     queen = 1 << 5,
     king = 1 << 6,
     white = 1 << 7,
+    firstMove = 1 << 8,
 }
 
 public static class ChessData
@@ -28,12 +29,12 @@ public static class ChessData
         {
             for(int j = 0; j < FILE; j++)
             {
-                setPieceData(i + j, ChessPieceData.white);
+                setPieceData(i + j, (byte)ChessPieceData.blank);
             }
         }
     }
 
-    public static void setPieceData(int index, ChessPieceData pieceType, bool isWhite = false)
+    public static void initializePieceData(int index, ChessPieceData pieceType, bool isWhite = false)
     {
 
         byte pieceData = (byte)pieceType;
@@ -42,7 +43,13 @@ public static class ChessData
             pieceData |= (byte)ChessPieceData.white;
         }
         
+        pieceData |= (byte)ChessPieceData.firstMove;
         chessBoardDataMap[index] = pieceData;
+    }
+
+    public static void setPieceData(int index, byte pieceType) 
+    {
+        chessBoardDataMap[index] = pieceType;
     }
     public static byte getPieceData(int index)
     {
