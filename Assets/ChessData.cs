@@ -43,7 +43,7 @@ public static class ChessData
             pieceData |= (byte)ChessPieceData.white;
         }
         
-        pieceData |= (byte)ChessPieceData.firstMove;
+        pieceData |= unchecked((byte)ChessPieceData.firstMove);
         chessBoardDataMap[index] = pieceData;
     }
 

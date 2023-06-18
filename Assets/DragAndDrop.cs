@@ -72,7 +72,7 @@ namespace ChessClasses {
             string lastPieceName = ChessData.getPieceName(lastPositionData);
 
             Debug.Log("Data -> chessData[" + index.ToString() + "]: " + pieceName);
-            Debug.Log("Data -> chessData[" + this.indexCache.ToStrding() + "]: " + lastPieceName);
+            Debug.Log("Data -> chessData[" + this.indexCache.ToString() + "]: " + lastPieceName);
             this.indexCache = -1;
         }
         
