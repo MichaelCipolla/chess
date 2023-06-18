@@ -16,9 +16,9 @@ class PawnState : IPieceState
         */
         if (endIndex >= startIndex + 7 && endIndex <= startIndex + 9)
         { 
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 }

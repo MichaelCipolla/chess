@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IPieceState : MonoBehaviour
+public interface IPieceState
 {
-    // Start is called before the first frame update
-    void Start()
+    //piece validation method
+    void validatePiece()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
