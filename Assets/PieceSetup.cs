@@ -1,6 +1,6 @@
-class PawnState : IPieceState 
+class PawnBehavior : PieceBehavior 
 {
-    bool validateMove(int startIndex, int endIndex) 
+    public override bool validateMove(int startIndex, int endIndex) 
     {
         /* Here we will check if the requested move is valid.
            Pawn moves: index + 8 (black)
@@ -23,45 +23,45 @@ class PawnState : IPieceState
     }
 }
 
-class KnightState : IPieceState 
+class KnightBehavior : PieceBehavior 
 {
-    bool validateMove(int startIndex, int endIndex) 
+    public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
     }
 }
 
-class BishopState : IPieceState
+class BishopBehavior : PieceBehavior
 {
-    bool validateMove(int startIndex, int endIndex) 
+    public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
     }
 }
 
-class RookState : IPieceState 
+class RookBehavior : PieceBehavior 
 {
-    bool validateMove(int startIndex, int endIndex) 
+    public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
     }
 }
 
-class QueenState : IPieceState
+class QueenBehavior : PieceBehavior
 {
-    bool validateMove(int startIndex, int endIndex) 
+    public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
     }
 }
 
-class KingState : IPieceState 
+class KingBehavior : PieceBehavior 
 {
-    bool validateMove(int startIndex, int endIndex) 
+    public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
