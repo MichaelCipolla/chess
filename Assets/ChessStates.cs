@@ -1,6 +1,6 @@
 class PawnState : IPieceState 
 {
-    boolean validateMove(int startIndex, int endIndex) 
+    bool validateMove(int startIndex, int endIndex) 
     {
         /* Here we will check if the requested move is valid.
            Pawn moves: index + 8 (black)
@@ -14,14 +14,18 @@ class PawnState : IPieceState
             First move: +- 8 or +- 16
 
         */
-        if(endIndex >= startIndex + 7 && endIndex <= startIndex + 9)
-        return false;
+        if (endIndex >= startIndex + 7 && endIndex <= startIndex + 9)
+        { 
+            return false;
+        } else {
+            return true;
+        }
     }
 }
 
 class KnightState : IPieceState 
 {
-    boolean validateMove(int startIndex, int endIndex) 
+    bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
@@ -30,7 +34,7 @@ class KnightState : IPieceState
 
 class BishopState : IPieceState
 {
-    boolean validateMove(int startIndex, int endIndex) 
+    bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
@@ -39,7 +43,7 @@ class BishopState : IPieceState
 
 class RookState : IPieceState 
 {
-    boolean validateMove(int startIndex, int endIndex) 
+    bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
@@ -48,7 +52,7 @@ class RookState : IPieceState
 
 class QueenState : IPieceState
 {
-    boolean validateMove(int startIndex, int endIndex) 
+    bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
@@ -57,7 +61,7 @@ class QueenState : IPieceState
 
 class KingState : IPieceState 
 {
-    boolean validateMove(int startIndex, int endIndex) 
+    bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
         return false;
