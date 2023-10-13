@@ -2,8 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PieceColor
+{
+    white,
+    black,
+}
+
 public abstract class PieceBehavior
 {
+    protected PieceColor pieceColor;
+
+    public PieceBehavior(PieceColor color)
+    {
+        this.pieceColor = color;
+    }
+
     /// <summary>
     /// The validateMove method checks to see if the given move is valid or not.
     /// </summary>

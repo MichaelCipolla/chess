@@ -34,11 +34,11 @@ public static class ChessData
         }
     }
 
-    public static void initializePieceData(int index, ChessPieceData pieceType, bool isWhite = false)
+    public static void initializePieceData(int index, ChessPieceData pieceType, PieceColor pieceColor = PieceColor.black)
     {
 
         byte pieceData = (byte)pieceType;
-        if(isWhite)
+        if(pieceColor == PieceColor.white)
         {
             pieceData |= (byte)ChessPieceData.white;
         }

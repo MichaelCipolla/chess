@@ -1,5 +1,10 @@
-class PawnBehavior : PieceBehavior 
+public class PawnBehavior : PieceBehavior 
 {
+    public PawnBehavior(PieceColor color) : base(color)
+    {
+        // Using the base constructor
+    }
+
     public override bool validateMove(int startIndex, int endIndex) 
     {
         /* Here we will check if the requested move is valid.
@@ -25,6 +30,11 @@ class PawnBehavior : PieceBehavior
 
 class KnightBehavior : PieceBehavior 
 {
+    public KnightBehavior(PieceColor color) : base(color)
+    {
+        // Using the base constructor
+    }
+
     public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
@@ -34,6 +44,11 @@ class KnightBehavior : PieceBehavior
 
 class BishopBehavior : PieceBehavior
 {
+    public BishopBehavior(PieceColor color) : base(color)
+    {
+        // Using the base constructor
+    }
+
     public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
@@ -43,6 +58,10 @@ class BishopBehavior : PieceBehavior
 
 class RookBehavior : PieceBehavior 
 {
+    public RookBehavior(PieceColor color) : base(color)
+    {
+        // Using the base constructor
+    }
     public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
@@ -52,6 +71,10 @@ class RookBehavior : PieceBehavior
 
 class QueenBehavior : PieceBehavior
 {
+    public QueenBehavior(PieceColor color) : base(color)
+    {
+        // Using the base constructor
+    }
     public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.
@@ -61,6 +84,10 @@ class QueenBehavior : PieceBehavior
 
 class KingBehavior : PieceBehavior 
 {
+    public KingBehavior(PieceColor color) : base(color)
+    {
+        // Using the base constructor
+    }
     public override bool validateMove(int startIndex, int endIndex) 
     {
         // Here we will check if the requested move is valid.

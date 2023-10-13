@@ -95,27 +95,21 @@ public class GeneratePositions : MonoBehaviour
             }
             if (currentPiece)
             {
-                currentQuad=instantiateNewPiece(currentQuad, currentRank, currentPieceDatagram, isWhite, currentPiece);
+                PieceColor pieceColor = PieceColor.black;
+                if(isWhite)
+                {
+                    pieceColor = PieceColor.white;
+                }
+                currentQuad = instantiateNewPiece(currentQuad, currentRank, currentPieceDatagram, pieceColor, currentPiece);
             }
         }
     }
 
-    private int instantiateNewPiece(int currentQuad, int currentRank, ChessPieceData currentPieceDatagram, bool isWhite, Sprite currentPiece)
+    private int instantiateNewPiece(int currentQuad, int currentRank, ChessPieceData currentPieceDatagram, PieceColor pieceColor, Sprite currentPiece)
     {
-        GameObject newPiece = new GameObject();
-        newPiece.name = ChessData.getPieceName((byte)currentPieceDatagram);
-        SpriteRenderer newSpriteRenderer = newPiece.AddComponent<SpriteRenderer>();
-        newSpriteRenderer.sprite = currentPiece;
-        Vector2 newScale = newSpriteRenderer.transform.localScale * scale;
-        newSpriteRenderer.transform.localScale = newScale;
-        newPiece.transform.position = new Vector2(firstQuad.transform.position.x + (currentQuad % 8), firstQuad.transform.position.y + currentRank);
-        ChessData.initializePieceData(currentQuad, currentPieceDatagram, isWhite);
+        PieceBehavior newBehavior = new PawnBehavior(PieceColor.white);
+        GamePiece newPiece = new GamePiece(currentQuad, currentRank, currentPieceDatagram, pieceColor, currentPiece, firstQuad, newBehavior, chessBoardData);
         currentQuad++;
-
-        newPiece.AddComponent<BoxCollider>();
-        newPiece.AddComponent<DragAndDrop>();
-        DragAndDrop movementScript = newPiece.GetComponent<DragAndDrop>();
-        movementScript.chessBoard = chessBoardData;
         return currentQuad;
     }
 }

@@ -54,7 +54,17 @@ notes.txt
                                         -> Both castling and fast pawn moves require that the piece has not moved yet.
                                             -> Current datagram:
                                                 
-                                    
+                Scratching all of the above and redesigning the way we handle piece movement. Created a behavior class which will be attached to a chess piece class object. This is a more practical
+                way to handle movement I believe.
 
+                What I need to do:
+                    Create a chess piece class. Should be generic. Attach a  to it, as well as other attributes: 
+                        piecebehavior
+                        transform, 
+                        game-object, 
+                        sprite,
+                        color enum,
+                        specialMove,
 
+                    We'll need to find all of the places where we should be referencing the piece instead and add it there.
                 
