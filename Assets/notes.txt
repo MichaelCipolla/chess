@@ -65,6 +65,20 @@ notes.txt
                         sprite,
                         color enum,
                         specialMove,
+			
+1. Ok we need to do some major refactoring. I want to have a class for each piece type, I want our controls to be an interface 
+    -> I'm opting for an interface for the controls over an abstract class for the sake of possibly combining multiple controls for a piece (this would allow us to make more than just chess as a game)
+        I think this is a good solution for this
+    -> As for the class, I have a number of problems with this code. I want to accomplish a type of Model, View, Control design, where I abstract all of the information that is important for the game
+    into a type of Model, which interfaces with the View. This way we could potentially have different types of client side representations of the chess game.
 
-                    We'll need to find all of the places where we should be referencing the piece instead and add it there.
-                
+    -> Should we have a main class or an abstract gamepiece class that requires its members to have certain methods? What are the benefits / drawbacks of both?
+        1. Presume we have one class for all of our chess pieces.... Would we write a new implementation for each? Not sure if C# even supports that kind of coding...
+            -> Ultimately we need to have a different validation method for each piece, which would differentiate valid moves from invalid moves. Each piece should also probably have its own way of determining 
+            if it is capturing a piece? Not 100% sure yet.
+
+        2. Ok we have a system where we create a gamePiece, but not a specific chess piece. We still need to be able to differentiate
+            -> So... next step will involve creating new classes for each piece, which we will index through a function that returns a class instantiation?
+                -> i.e. GamePiece piece = someFunct(...);
+
+            

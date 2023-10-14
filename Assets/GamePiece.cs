@@ -1,38 +1,53 @@
-using ChessClasses;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using ChessClasses;
 
-public class GamePiece
-{
-    private GameObject gameObject;
-    private SpriteRenderer spriteRenderer;
-    private Vector2 scale;
-    private BoxCollider boxColliderComponent;
-    private DragAndDrop dragAndDropComponent;
-
-    private PieceBehavior behavior;
-
-    public GamePiece(int currentQuad, int currentRank, ChessPieceData currentPieceDatagram, PieceColor pieceColor, Sprite currentPiece, GameObject firstQuad, PieceBehavior newBehavior, ChessBoard chessBoardData)
+namespace ChessClasses {
+    public class GamePiece : GameObject, IPieceBehavior
     {
-        this.gameObject = new GameObject();
-        this.gameObject.name = ChessData.getPieceName((byte)currentPieceDatagram);
-        
-        this.spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        this.spriteRenderer.sprite = currentPiece;
-        Vector2 newScale = this.spriteRenderer.transform.localScale * scale;
-        this.spriteRenderer.transform.localScale = newScale;
-        
-        this.gameObject.transform.position = new Vector2(firstQuad.transform.position.x + (currentQuad % 8), firstQuad.transform.position.y + currentRank);
-        ChessData.initializePieceData(currentQuad, currentPieceDatagram, pieceColor);
+        // Gamepiece should inherit from GameObject
+        // Transform and such
 
-        this.boxColliderComponent = this.gameObject.AddComponent<BoxCollider>();
-        this.dragAndDropComponent = this.gameObject.AddComponent<DragAndDrop>();
-        this.dragAndDropComponent.chessBoard = chessBoardData;
+        // It should also implement some kind of validate move interface.
 
-        // Add the behavior:
-        this.behavior = newBehavior;
+        // It needs to have a control attribute (we will use the DragAndDrop behavior at first):
+        public MonoBehaviour controlInterface;
+
+        public GameObject referenceQuad;
+
+        // It should have a sprite renderer for its sprite
+        public SpriteRenderer spriteRenderer;
+
+        private Vector2 _scale;
+        public Vector2 scale {
+            get => _scale;
+            set {
+                _scale = value * spriteRenderer.transform.localScale;
+            }
+        }
+
+        private Vector2 _position;
+        public Vector2 position {
+            get => _position;
+            set {
+                int currentQuad = value.x;
+                int currentRank = value.y;
+                _position = new Vector2(referenceQuad.transform.position.x + (currentQuad % 8), referenceQuad.transform.position.y + currentRank);
+            }
+        }
+        public GameObject gameObjectRef; // TODO: Should we extend from gameObject or should we contain a gameObejct reference??
+
+        public BoxCollider boxCollider;
+
+        public bool validateMove(int startIndex, int endIndex) {
+            Debug.Log("WARNING: Validate Move has not been implemented!");
+            return false;
+        }
+        GamePiece() {
+            spriteRenderer = this.AddComponent<SpriteRenderer>();
+            boxCollider = this.AddComponent<BoxCollider>();
+            controlInterface = this.AddComponent<DragAndDrop>();
+        }
     }
-
-
 }
+

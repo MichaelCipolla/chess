@@ -8,8 +8,9 @@ public enum PieceColor
     black,
 }
 
-public abstract class PieceBehavior
+public interface IPieceBehavior
 {
+	// TODO: These elements belong in the gamePiece class. Not the behavior interface.
     protected PieceColor pieceColor;
 
     public PieceBehavior(PieceColor color)
@@ -21,10 +22,5 @@ public abstract class PieceBehavior
     /// The validateMove method checks to see if the given move is valid or not.
     /// </summary>
     /// <returns>bool indicating the validity of the move.</returns>
-    public virtual bool validateMove(int startIndex, int endIndex)
-    {
-        // Return false by default
-        Debug.LogError("Error: The requested piece has no defined valid moves!");
-        return false;
-    }
+    public virtual bool validateMove(int startIndex, int endIndex);
 }
