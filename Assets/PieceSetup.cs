@@ -1,5 +1,8 @@
 namespace ChessClasses {
     class PawnPiece : GamePiece {
+        public PawnPiece(PieceColor color) : base(color) {
+            
+        }
         public override bool validateMove(int startIndex, int endIndex) {
             /* Here we will check if the requested move is valid.
             Pawn moves: index + 8 (black)
@@ -23,6 +26,9 @@ namespace ChessClasses {
     }
 
     class KnightPiece : GamePiece {
+        public KnightPiece(PieceColor color) : base(color) {
+
+        }
         public override bool validateMove(int startIndex, int endIndex) {
             // Here we will check if the requested move is valid.
             return false;
@@ -30,6 +36,9 @@ namespace ChessClasses {
     }
 
     class BishopPiece : GamePiece {
+        public BishopPiece(PieceColor color) : base(color) {
+
+        }
         public override bool validateMove(int startIndex, int endIndex) {
             // Here we will check if the requested move is valid.
             return false;
@@ -37,6 +46,9 @@ namespace ChessClasses {
     }
 
     class RookPiece : GamePiece {
+        public RookPiece(PieceColor color) : base(color) {
+
+        }
         public override bool validateMove(int startIndex, int endIndex) {
             // Here we will check if the requested move is valid.
             return false;
@@ -44,6 +56,9 @@ namespace ChessClasses {
     }
 
     class QueenPiece : GamePiece {
+        public QueenPiece(PieceColor color) : base(color) {
+
+        }
         public override bool validateMove(int startIndex, int endIndex) {
             // Here we will check if the requested move is valid.
             return false;
@@ -51,6 +66,9 @@ namespace ChessClasses {
     }
 
     class KingPiece : GamePiece {
+        public KingPiece(PieceColor color) : base(color) {
+
+        }
         public override bool validateMove(int startIndex, int endIndex) {
             // Here we will check if the requested move is valid.
             return false;

@@ -18,17 +18,20 @@ namespace ChessClasses {
         // It should also implement some kind of validate move interface.
 
         // It needs to have a control attribute (we will use the DragAndDrop behavior at first):
-        public MonoBehaviour controlInterface;
+        public DragAndDrop controlInterface;
 
         public GameObject referenceQuad;
 
         // It should have a sprite renderer for its sprite
         public SpriteRenderer spriteRenderer;
 
-        private Vector2 _scale;
-        public Vector2 scale {
-            get => _scale;
+        private Vector3 _scale;
+
+        private float _scaleFactor;
+        public float scale {
+            get => _scaleFactor;
             set {
+                _scaleFactor = value;
                 _scale = value * spriteRenderer.transform.localScale;
             }
         }
@@ -46,11 +49,11 @@ namespace ChessClasses {
 
         public BoxCollider boxCollider;
 
-        public bool validateMove(int startIndex, int endIndex) {
+        public virtual bool validateMove(int startIndex, int endIndex) {
             Debug.Log("WARNING: Validate Move has not been implemented!");
             return false;
         }
-        GamePiece(PieceColor color) {
+        public GamePiece(PieceColor color) {
             this.pieceColor = color;
 
             spriteRenderer = this.gameObject.AddComponent<SpriteRenderer>();

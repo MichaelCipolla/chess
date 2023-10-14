@@ -120,41 +120,41 @@ public class GeneratePositions : MonoBehaviour {
     }
 
     private int instantiateNewPieceTemp(int currentQuad, int currentRank, ChessPieceData currentPieceDataGram, PieceColor pieceColor, Sprite currentPiece) {
-        GamePiece newPiece = pieceFactory(currentPieceDataGram);
+        GamePiece newPiece = pieceFactory(currentPieceDataGram, pieceColor);
 
         // Add sprite...
         newPiece.controlInterface.chessBoard = chessBoardData;
         newPiece.spriteRenderer.sprite = currentPiece;
         // Update position...
         newPiece.scale = scale;
-        newPiece.position = Vector2(currentQuad, currentRank);
+        newPiece.position = new Vector2(currentQuad, currentRank);
 
         return ++currentQuad;
     }
 
-    private GamePiece pieceFactory(ChessPieceData currentPieceDataGram) {
-        GamePiece newPiece;
+    private GamePiece? pieceFactory(ChessPieceData currentPieceDataGram, PieceColor color) {
+        GamePiece newPiece = null;
         switch (currentPieceDataGram) {
             case (ChessPieceData.pawn):
-                newPiece = new PawnPiece();
+                newPiece = new PawnPiece(color);
                 break;
             case (ChessPieceData.rook):
-                newPiece = new RookPiece();
+                newPiece = new RookPiece(color);
                 break;
             case (ChessPieceData.knight):
-                newPiece = new KnightPiece();
+                newPiece = new KnightPiece(color);
                 break;
             case (ChessPieceData.bishop):
-                newPiece = new BishopPiece();
+                newPiece = new BishopPiece(color);
                 break;
             case (ChessPieceData.king):
-                newPiece = new KingPiece();
+                newPiece = new KingPiece(color);
                 break;
             case (ChessPieceData.queen):
-                newPiece = new QueenPiece();
+                newPiece = new QueenPiece(color);
                 break;
             default:
-                Console.log("ERROR: pieceFactory is creating an unsupported piece!");
+                Debug.Log("ERROR: pieceFactory is creating an unsupported piece!");
                 break;
         }
         return newPiece;
