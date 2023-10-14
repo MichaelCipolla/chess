@@ -13,5 +13,5 @@ namespace ChessClasses {
                 tileArray[i] = new ChessTile(parentTransform.GetChild(i).gameObject, i);
             }
         }
-    }    
+    }
 }

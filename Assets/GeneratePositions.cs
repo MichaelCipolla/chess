@@ -2,12 +2,11 @@ using System;
 using UnityEngine;
 using ChessClasses;
 
-public class GeneratePositions : MonoBehaviour
-{
+public class GeneratePositions : MonoBehaviour {
     //public ChessPositions chessData;
 
     public GameObject chessBoard;
-    
+
     // Bottom left quad for position reference
     public GameObject firstQuad;
 
@@ -25,7 +24,7 @@ public class GeneratePositions : MonoBehaviour
     public Sprite whiteQueen;
     public Sprite whiteRook;
     public Sprite whiteBishop;
-    
+
     public Sprite blackKnight;
     public Sprite blackKing;
     public Sprite blackPawn;
@@ -35,17 +34,14 @@ public class GeneratePositions : MonoBehaviour
 
     public ChessBoard chessBoardData;
 
-    private void Start()
-    {
+    private void Start() {
         this.chessBoardData = new ChessBoard(chessBoard);
         //chessData = new ChessPositions();
         interpretFENData();
     }
 
-    private void interpretFENData()
-    {
-        if (string.IsNullOrEmpty(fenInput))
-        {
+    private void interpretFENData() {
+        if (string.IsNullOrEmpty(fenInput)) {
             // TODO: We should just default to the starting board position if no FEN is defined.
             return;
         }
@@ -54,13 +50,11 @@ public class GeneratePositions : MonoBehaviour
         int currentRank = 0;
         ChessPieceData currentPieceDatagram = ChessPieceData.white;
 
-        foreach (char quad in fenInput)
-        {
+        foreach (char quad in fenInput) {
             bool isWhite = char.IsUpper(quad);
             char processedQuad = char.ToLower(quad);
             Sprite currentSprite = null;
-            switch (processedQuad)
-            {
+            switch (processedQuad) {
                 case ('k'):
                     currentSprite = isWhite ? whiteKing : blackKing;
                     currentPieceDatagram = ChessPieceData.king;
@@ -94,11 +88,9 @@ public class GeneratePositions : MonoBehaviour
                     currentQuad += int.Parse(processedQuad.ToString());
                     break;
             }
-            if (currentSprite)
-            {
+            if (currentSprite) {
                 PieceColor pieceColor = PieceColor.black;
-                if(isWhite)
-                {
+                if (isWhite) {
                     pieceColor = PieceColor.white;
                 }
                 currentQuad = instantiateNewPiece(currentQuad, currentRank, currentPieceDatagram, pieceColor, currentSprite);
@@ -106,14 +98,13 @@ public class GeneratePositions : MonoBehaviour
         }
     }
 
-    private int instantiateNewPiece(int currentQuad, int currentRank, ChessPieceData currentPieceDatagram, PieceColor pieceColor, Sprite currentPiece)
-    {
+    private int instantiateNewPiece(int currentQuad, int currentRank, ChessPieceData currentPieceDatagram, PieceColor pieceColor, Sprite currentPiece) {
         GameObject newPiece = new GameObject(); // TODO: Using the new system, we can now instantiate a new GamePiece()
 
         // newPiece.name = ChessData.getPieceName((byte)currentPieceDatagram);
 
         SpriteRenderer newSpriteRenderer = newPiece.AddComponent<SpriteRenderer>();
-        
+
         newSpriteRenderer.sprite = currentPiece;
         Vector2 newScale = newSpriteRenderer.transform.localScale * scale;
         newSpriteRenderer.transform.localScale = newScale;
@@ -143,26 +134,26 @@ public class GeneratePositions : MonoBehaviour
 
     private GamePiece pieceFactory(ChessPieceData currentPieceDataGram) {
         GamePiece newPiece;
-        switch(currentPieceDataGram){
-            case(ChessPieceData.pawn):
+        switch (currentPieceDataGram) {
+            case (ChessPieceData.pawn):
                 newPiece = new PawnPiece();
                 break;
-            case(ChessPieceData.rook): 
+            case (ChessPieceData.rook):
                 newPiece = new RookPiece();
                 break;
-            case(ChessPieceData.knight):
-                newPiece = new KnightPiece(); 
+            case (ChessPieceData.knight):
+                newPiece = new KnightPiece();
                 break;
-            case(ChessPieceData.bishop):
+            case (ChessPieceData.bishop):
                 newPiece = new BishopPiece();
                 break;
-            case(ChessPieceData.king):
+            case (ChessPieceData.king):
                 newPiece = new KingPiece();
                 break;
-            case(ChessPieceData.queen):
+            case (ChessPieceData.queen):
                 newPiece = new QueenPiece();
                 break;
-            default: 
+            default:
                 Console.log("ERROR: pieceFactory is creating an unsupported piece!");
                 break;
         }

@@ -1,10 +1,17 @@
-using System;
+using Unity.VisualScripting;
 using UnityEngine;
-using ChessClasses;
 
 namespace ChessClasses {
-    public class GamePiece : GameObject, IPieceBehavior
-    {
+    public enum PieceColor {
+        white,
+        black,
+    }
+
+    public class GamePiece : MonoBehaviour, IPieceBehavior {
+
+        // TODO: These elements belong in the gamePiece class. Not the behavior interface.
+        protected PieceColor pieceColor;
+
         // Gamepiece should inherit from GameObject
         // Transform and such
 
@@ -30,8 +37,8 @@ namespace ChessClasses {
         public Vector2 position {
             get => _position;
             set {
-                int currentQuad = value.x;
-                int currentRank = value.y;
+                float currentQuad = value.x;
+                float currentRank = value.y;
                 _position = new Vector2(referenceQuad.transform.position.x + (currentQuad % 8), referenceQuad.transform.position.y + currentRank);
             }
         }
@@ -43,10 +50,12 @@ namespace ChessClasses {
             Debug.Log("WARNING: Validate Move has not been implemented!");
             return false;
         }
-        GamePiece() {
-            spriteRenderer = this.AddComponent<SpriteRenderer>();
-            boxCollider = this.AddComponent<BoxCollider>();
-            controlInterface = this.AddComponent<DragAndDrop>();
+        GamePiece(PieceColor color) {
+            this.pieceColor = color;
+
+            spriteRenderer = this.gameObject.AddComponent<SpriteRenderer>();
+            boxCollider = this.gameObject.AddComponent<BoxCollider>();
+            controlInterface = this.gameObject.AddComponent<DragAndDrop>();
         }
     }
 }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ChessClasses {
-    public class DragAndDrop : MonoBehaviour
-    {
+    public class DragAndDrop : MonoBehaviour {
         public ChessBoard chessBoard;
         private bool isGrabbed = false;
         private Vector2 positionCache;
@@ -13,15 +12,13 @@ namespace ChessClasses {
 
         private byte currentPiece = 0b0000;
 
-        private void Start()
-        {
+        private void Start() {
             // chessBoard = GameObject.Find("GameBoard");
         }
 
-        private void OnMouseDown()
-        {
+        private void OnMouseDown() {
             ChessTile currentTile = getCurrentTile();
-            if(currentTile == null) {
+            if (currentTile == null) {
                 Debug.Log("WARNING: START TILE NOT RECOGNIZED!!");
                 return;
             }
@@ -35,10 +32,8 @@ namespace ChessClasses {
             this.isGrabbed = true;
         }
 
-        private void Update()
-        {
-            if (this.isGrabbed)
-            {
+        private void Update() {
+            if (this.isGrabbed) {
                 // Get the position of the pointer in screen coordinates
                 Vector3 pointerPos = Input.mousePosition;
 
@@ -50,14 +45,13 @@ namespace ChessClasses {
             }
         }
 
-        private void OnMouseUp()
-        {
+        private void OnMouseUp() {
             byte pieceCache = currentPiece;
             currentPiece = 0b0000;
 
             this.isGrabbed = false;
             ChessTile currentTile = getCurrentTile();
-            if(currentTile == null) {
+            if (currentTile == null) {
                 transform.position = this.positionCache;
                 return;
             }
@@ -75,10 +69,9 @@ namespace ChessClasses {
             Debug.Log("Data -> chessData[" + this.indexCache.ToString() + "]: " + lastPieceName);
             this.indexCache = -1;
         }
-        
+
         private ChessTile? getCurrentTile() {
-            for(int i = 0; i < this.chessBoard.tileArray.Length; i++)
-            {
+            for (int i = 0; i < this.chessBoard.tileArray.Length; i++) {
                 // Grab the chessQuad
                 ChessTile chessQuad = this.chessBoard.tileArray[i];
 
@@ -87,8 +80,7 @@ namespace ChessClasses {
 
                 // Check if "this" is colliding with the given quad
                 bool isColliding = collider.OverlapPoint(transform.position);
-                if(isColliding)
-                {
+                if (isColliding) {
                     return chessQuad;
                 }
             }

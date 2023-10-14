@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public class GenerateGameBoard : MonoBehaviour
-{
+public class GenerateGameBoard : MonoBehaviour {
     private const int RANKS = 8;
     private const int FILES = 8;
     private const float spacing = 1f;
@@ -10,18 +9,14 @@ public class GenerateGameBoard : MonoBehaviour
     public Material blackMat;
     public Material whiteMat;
 
-    void Start()
-    {
+    void Start() {
         GenerateBoard();
     }
-    void GenerateBoard()
-    {
+    void GenerateBoard() {
         int count = 0;
         GameObject parent = new GameObject("Board");
-        for (int i = 0; i < RANKS; i++)
-        {
-            for (int j = 0; j < FILES; j++)
-            {
+        for (int i = 0; i < RANKS; i++) {
+            for (int j = 0; j < FILES; j++) {
                 GameObject square = GameObject.CreatePrimitive(PrimitiveType.Quad);
                 square.name = "Quad_" + count;
                 square.transform.position = new Vector2(j * spacing, i * spacing);
