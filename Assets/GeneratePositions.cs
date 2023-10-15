@@ -2,12 +2,11 @@ using System;
 using UnityEngine;
 using ChessClasses;
 
-public class GeneratePositions : MonoBehaviour
-{
+public class GeneratePositions : MonoBehaviour {
     //public ChessPositions chessData;
 
     public GameObject chessBoard;
-    
+
     // Bottom left quad for position reference
     public GameObject firstQuad;
 
@@ -25,7 +24,7 @@ public class GeneratePositions : MonoBehaviour
     public Sprite whiteQueen;
     public Sprite whiteRook;
     public Sprite whiteBishop;
-    
+
     public Sprite blackKnight;
     public Sprite blackKing;
     public Sprite blackPawn;
@@ -35,17 +34,15 @@ public class GeneratePositions : MonoBehaviour
 
     public ChessBoard chessBoardData;
 
-    private void Start()
-    {
+    private void Start() {
         this.chessBoardData = new ChessBoard(chessBoard);
         //chessData = new ChessPositions();
-        PlacePieces();
+        interpretFENData();
     }
 
-    private void PlacePieces()
-    {
-        if (string.IsNullOrEmpty(fenInput))
-        {
+    private void interpretFENData() {
+        if (string.IsNullOrEmpty(fenInput)) {
+            // TODO: We should just default to the starting board position if no FEN is defined.
             return;
         }
         // Quad = 0 is the lower left square (a1)
@@ -53,35 +50,33 @@ public class GeneratePositions : MonoBehaviour
         int currentRank = 0;
         ChessPieceData currentPieceDatagram = ChessPieceData.white;
 
-        foreach (char quad in fenInput)
-        {
+        foreach (char quad in fenInput) {
             bool isWhite = char.IsUpper(quad);
             char processedQuad = char.ToLower(quad);
-            Sprite currentPiece = null;
-            switch (processedQuad)
-            {
+            Sprite currentSprite = null;
+            switch (processedQuad) {
                 case ('k'):
-                    currentPiece = isWhite ? whiteKing : blackKing;
+                    currentSprite = isWhite ? whiteKing : blackKing;
                     currentPieceDatagram = ChessPieceData.king;
                     break;
                 case ('n'):
-                    currentPiece = isWhite ? whiteKnight : blackKnight;
+                    currentSprite = isWhite ? whiteKnight : blackKnight;
                     currentPieceDatagram = ChessPieceData.knight;
                     break;
                 case ('b'):
-                    currentPiece = isWhite ? whiteBishop : blackBishop;
+                    currentSprite = isWhite ? whiteBishop : blackBishop;
                     currentPieceDatagram = ChessPieceData.bishop;
                     break;
                 case ('r'):
-                    currentPiece = isWhite ? whiteRook : blackRook;
+                    currentSprite = isWhite ? whiteRook : blackRook;
                     currentPieceDatagram = ChessPieceData.rook;
                     break;
                 case ('p'):
-                    currentPiece = isWhite ? whitePawn : blackPawn;
+                    currentSprite = isWhite ? whitePawn : blackPawn;
                     currentPieceDatagram = ChessPieceData.pawn;
                     break;
                 case ('q'):
-                    currentPiece = isWhite ? whiteQueen : blackQueen;
+                    currentSprite = isWhite ? whiteQueen : blackQueen;
                     currentPieceDatagram = ChessPieceData.queen;
                     break;
                 case ('/'):
@@ -93,29 +88,65 @@ public class GeneratePositions : MonoBehaviour
                     currentQuad += int.Parse(processedQuad.ToString());
                     break;
             }
-            if (currentPiece)
-            {
-                currentQuad=instantiateNewPiece(currentQuad, currentRank, currentPieceDatagram, isWhite, currentPiece);
+            if (currentSprite) {
+                PieceColor pieceColor = PieceColor.BLACK;
+                if (isWhite) {
+                    pieceColor = PieceColor.WHITE;
+                }
+                currentQuad = instantiateNewPiece(currentQuad, currentRank, currentPieceDatagram, pieceColor, currentSprite);
             }
         }
     }
 
-    private int instantiateNewPiece(int currentQuad, int currentRank, ChessPieceData currentPieceDatagram, bool isWhite, Sprite currentPiece)
-    {
-        GameObject newPiece = new GameObject();
-        newPiece.name = ChessData.getPieceName((byte)currentPieceDatagram);
-        SpriteRenderer newSpriteRenderer = newPiece.AddComponent<SpriteRenderer>();
-        newSpriteRenderer.sprite = currentPiece;
-        Vector2 newScale = newSpriteRenderer.transform.localScale * scale;
-        newSpriteRenderer.transform.localScale = newScale;
-        newPiece.transform.position = new Vector2(firstQuad.transform.position.x + (currentQuad % 8), firstQuad.transform.position.y + currentRank);
-        ChessData.initializePieceData(currentQuad, currentPieceDatagram, isWhite);
-        currentQuad++;
+    private int instantiateNewPiece(int currentQuad, int currentRank, ChessPieceData currentPieceDatagram, PieceColor pieceColor, Sprite currentPiece) {
+        GamePiece newPiece = pieceFactory(currentPieceDatagram, pieceColor);
 
-        newPiece.AddComponent<BoxCollider>();
-        newPiece.AddComponent<DragAndDrop>();
-        DragAndDrop movementScript = newPiece.GetComponent<DragAndDrop>();
+        newPiece.referenceQuad = firstQuad;
+
+        string pieceColorIdentifier = pieceColor == PieceColor.WHITE ? "_White" : "_Black";
+        newPiece.gameObject.name = ChessData.getPieceName((byte)currentPieceDatagram) + pieceColorIdentifier;
+
+        // Add sprite...
+        newPiece.controlInterface.chessBoard = chessBoardData;
+        newPiece.spriteRenderer.sprite = currentPiece;
+        // Update position...
+        newPiece.scale = scale;
+        newPiece.position = new Vector2(currentQuad, currentRank);
+
+        ChessData.initializePieceData(currentQuad, currentPieceDatagram, pieceColor);
+
+        DragAndDrop movementScript = newPiece.gameObject.GetComponent<DragAndDrop>();
         movementScript.chessBoard = chessBoardData;
-        return currentQuad;
+        movementScript.gamePiece = newPiece;
+
+        return ++currentQuad;
+    }
+
+    private GamePiece? pieceFactory(ChessPieceData currentPieceDatagram, PieceColor color) {
+        GamePiece newPiece = null;
+        switch (currentPieceDatagram) {
+            case (ChessPieceData.pawn):
+                newPiece = new PawnPiece(color);
+                break;
+            case (ChessPieceData.rook):
+                newPiece = new RookPiece(color);
+                break;
+            case (ChessPieceData.knight):
+                newPiece = new KnightPiece(color);
+                break;
+            case (ChessPieceData.bishop):
+                newPiece = new BishopPiece(color);
+                break;
+            case (ChessPieceData.king):
+                newPiece = new KingPiece(color);
+                break;
+            case (ChessPieceData.queen):
+                newPiece = new QueenPiece(color);
+                break;
+            default:
+                Debug.Log("ERROR: pieceFactory is creating an unsupported piece!");
+                break;
+        }
+        return newPiece;
     }
 }
