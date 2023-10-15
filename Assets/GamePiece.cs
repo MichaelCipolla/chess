@@ -3,14 +3,18 @@ using UnityEngine;
 
 namespace ChessClasses {
     public enum PieceColor {
-        white,
-        black,
+        WHITE,
+        BLACK,
     }
 
-    public class GamePiece : MonoBehaviour, IPieceBehavior {
+    public class GamePiece : IPieceBehavior {
 
         // TODO: These elements belong in the gamePiece class. Not the behavior interface.
         protected PieceColor pieceColor;
+
+        public GameObject gameObject;
+
+        public BoxCollider boxCollider;
 
         // Gamepiece should inherit from GameObject
         // Transform and such
@@ -25,14 +29,16 @@ namespace ChessClasses {
         // It should have a sprite renderer for its sprite
         public SpriteRenderer spriteRenderer;
 
-        private Vector3 _scale;
+        private Vector2 _scale;
 
         private float _scaleFactor;
         public float scale {
             get => _scaleFactor;
             set {
                 _scaleFactor = value;
-                _scale = value * spriteRenderer.transform.localScale;
+                _scale = value * this.spriteRenderer.transform.localScale;
+                this.spriteRenderer.transform.localScale = _scale;
+                this.boxCollider.size *= 1 / _scaleFactor;
             }
         }
 
@@ -43,22 +49,21 @@ namespace ChessClasses {
                 float currentQuad = value.x;
                 float currentRank = value.y;
                 _position = new Vector2(referenceQuad.transform.position.x + (currentQuad % 8), referenceQuad.transform.position.y + currentRank);
+                this.gameObject.transform.position = _position;
             }
         }
-        public GameObject gameObjectRef; // TODO: Should we extend from gameObject or should we contain a gameObejct reference??
-
-        public BoxCollider boxCollider;
 
         public virtual bool validateMove(int startIndex, int endIndex) {
             Debug.Log("WARNING: Validate Move has not been implemented!");
             return false;
         }
+
         public GamePiece(PieceColor color) {
             this.pieceColor = color;
-
+            this.gameObject = new GameObject();
             spriteRenderer = this.gameObject.AddComponent<SpriteRenderer>();
-            boxCollider = this.gameObject.AddComponent<BoxCollider>();
             controlInterface = this.gameObject.AddComponent<DragAndDrop>();
+            boxCollider = this.gameObject.AddComponent<BoxCollider>();
         }
     }
 }

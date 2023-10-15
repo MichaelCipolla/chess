@@ -89,9 +89,9 @@ public class GeneratePositions : MonoBehaviour {
                     break;
             }
             if (currentSprite) {
-                PieceColor pieceColor = PieceColor.black;
+                PieceColor pieceColor = PieceColor.BLACK;
                 if (isWhite) {
-                    pieceColor = PieceColor.white;
+                    pieceColor = PieceColor.WHITE;
                 }
                 currentQuad = instantiateNewPiece(currentQuad, currentRank, currentPieceDatagram, pieceColor, currentSprite);
             }
@@ -99,28 +99,12 @@ public class GeneratePositions : MonoBehaviour {
     }
 
     private int instantiateNewPiece(int currentQuad, int currentRank, ChessPieceData currentPieceDatagram, PieceColor pieceColor, Sprite currentPiece) {
-        GameObject newPiece = new GameObject(); // TODO: Using the new system, we can now instantiate a new GamePiece()
+        GamePiece newPiece = pieceFactory(currentPieceDatagram, pieceColor);
 
-        // newPiece.name = ChessData.getPieceName((byte)currentPieceDatagram);
+        newPiece.referenceQuad = firstQuad;
 
-        SpriteRenderer newSpriteRenderer = newPiece.AddComponent<SpriteRenderer>();
-
-        newSpriteRenderer.sprite = currentPiece;
-        Vector2 newScale = newSpriteRenderer.transform.localScale * scale;
-        newSpriteRenderer.transform.localScale = newScale;
-        newPiece.transform.position = new Vector2(firstQuad.transform.position.x + (currentQuad % 8), firstQuad.transform.position.y + currentRank);
-        // ChessData.initializePieceData(currentQuad, currentPieceDatagram, pieceColor);
-        currentQuad++;
-
-        newPiece.AddComponent<BoxCollider>();
-        newPiece.AddComponent<DragAndDrop>();
-        DragAndDrop movementScript = newPiece.GetComponent<DragAndDrop>();
-        movementScript.chessBoard = chessBoardData;
-        return currentQuad;
-    }
-
-    private int instantiateNewPieceTemp(int currentQuad, int currentRank, ChessPieceData currentPieceDataGram, PieceColor pieceColor, Sprite currentPiece) {
-        GamePiece newPiece = pieceFactory(currentPieceDataGram, pieceColor);
+        string pieceColorIdentifier = pieceColor == PieceColor.WHITE ? "_White" : "_Black";
+        newPiece.gameObject.name = ChessData.getPieceName((byte)currentPieceDatagram) + pieceColorIdentifier;
 
         // Add sprite...
         newPiece.controlInterface.chessBoard = chessBoardData;
@@ -129,12 +113,18 @@ public class GeneratePositions : MonoBehaviour {
         newPiece.scale = scale;
         newPiece.position = new Vector2(currentQuad, currentRank);
 
+        ChessData.initializePieceData(currentQuad, currentPieceDatagram, pieceColor);
+
+        DragAndDrop movementScript = newPiece.gameObject.GetComponent<DragAndDrop>();
+        movementScript.chessBoard = chessBoardData;
+        movementScript.gamePiece = newPiece;
+
         return ++currentQuad;
     }
 
-    private GamePiece? pieceFactory(ChessPieceData currentPieceDataGram, PieceColor color) {
+    private GamePiece? pieceFactory(ChessPieceData currentPieceDatagram, PieceColor color) {
         GamePiece newPiece = null;
-        switch (currentPieceDataGram) {
+        switch (currentPieceDatagram) {
             case (ChessPieceData.pawn):
                 newPiece = new PawnPiece(color);
                 break;

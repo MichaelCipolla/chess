@@ -16,6 +16,16 @@ namespace ChessClasses {
                 First move: +- 8 or +- 16
 
             */
+
+            // Collision check: 
+            byte pieceData = ChessData.getPieceData(endIndex);
+
+            if(pieceData != (byte)ChessPieceData.blank) {
+                // We should execute capture logic here...
+                // Based on capture logic, we can further validate the move...
+                return false;
+            }
+
             if (endIndex >= startIndex + 7 && endIndex <= startIndex + 9) {
                 return true;
             }
@@ -30,8 +40,15 @@ namespace ChessClasses {
 
         }
         public override bool validateMove(int startIndex, int endIndex) {
+            byte pieceData = ChessData.getPieceData(endIndex);
+
+            if (pieceData != (byte)ChessPieceData.blank) {
+                // We should execute capture logic here...
+                // Based on capture logic, we can further validate the move...
+                return false;
+            }
             // Here we will check if the requested move is valid.
-            return false;
+            return true;
         }
     }
 
@@ -40,8 +57,15 @@ namespace ChessClasses {
 
         }
         public override bool validateMove(int startIndex, int endIndex) {
+            byte pieceData = ChessData.getPieceData(endIndex);
+
+            if (pieceData != (byte)ChessPieceData.blank) {
+                // We should execute capture logic here...
+                // Based on capture logic, we can further validate the move...
+                return false;
+            }
             // Here we will check if the requested move is valid.
-            return false;
+            return true;
         }
     }
 
@@ -50,8 +74,15 @@ namespace ChessClasses {
 
         }
         public override bool validateMove(int startIndex, int endIndex) {
+            byte pieceData = ChessData.getPieceData(endIndex);
+
+            if (pieceData != (byte)ChessPieceData.blank) {
+                // We should execute capture logic here...
+                // Based on capture logic, we can further validate the move...
+                return false;
+            }
             // Here we will check if the requested move is valid.
-            return false;
+            return true;
         }
     }
 
@@ -60,8 +91,15 @@ namespace ChessClasses {
 
         }
         public override bool validateMove(int startIndex, int endIndex) {
+            byte pieceData = ChessData.getPieceData(endIndex);
+
+            if (pieceData != (byte)ChessPieceData.blank) {
+                // We should execute capture logic here...
+                // Based on capture logic, we can further validate the move...
+                return false;
+            }
             // Here we will check if the requested move is valid.
-            return false;
+            return true;
         }
     }
 
@@ -70,8 +108,15 @@ namespace ChessClasses {
 
         }
         public override bool validateMove(int startIndex, int endIndex) {
+            byte pieceData = ChessData.getPieceData(endIndex);
+
+            if (pieceData != (byte)ChessPieceData.blank) {
+                // We should execute capture logic here...
+                // Based on capture logic, we can further validate the move...
+                return false;
+            }
             // Here we will check if the requested move is valid.
-            return false;
+            return true;
         }
     }
 }

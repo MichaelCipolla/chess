@@ -27,10 +27,10 @@ public static class ChessData {
         }
     }
 
-    public static void initializePieceData(int index, ChessPieceData pieceType, PieceColor pieceColor = PieceColor.black) {
+    public static void initializePieceData(int index, ChessPieceData pieceType, PieceColor pieceColor = PieceColor.BLACK) {
 
         byte pieceData = (byte)pieceType;
-        if (pieceColor == PieceColor.white) {
+        if (pieceColor == PieceColor.WHITE) {
             pieceData |= (byte)ChessPieceData.white;
         }
 
@@ -65,7 +65,7 @@ public static class ChessData {
             return "Queen";
         }
         else {
-            return "Unknown Piece";
+            return "Unknown Piece (Data: " + piece + ")";
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ChessClasses {
     public class DragAndDrop : MonoBehaviour {
+        public GamePiece gamePiece;
         public ChessBoard chessBoard;
         private bool isGrabbed = false;
         private Vector2 positionCache;
@@ -51,7 +52,7 @@ namespace ChessClasses {
 
             this.isGrabbed = false;
             ChessTile currentTile = getCurrentTile();
-            if (currentTile == null) {
+            if (currentTile == null || !this.gamePiece.validateMove(this.indexCache, currentTile.getIndex())) {
                 transform.position = this.positionCache;
                 return;
             }
