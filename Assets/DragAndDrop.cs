@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 namespace ChessClasses {
@@ -85,6 +86,13 @@ namespace ChessClasses {
                     return chessQuad;
                 }
             }
+            return null;
+        }
+
+        private GamePiece? getGamePieceByIndex(int index) {
+            ChessTile chessQuad = this.chessBoard.tileArray[index];
+            Collider2D collider = chessQuad.getGameObject().GetComponent<Collider2D>();
+
             return null;
         }
     }

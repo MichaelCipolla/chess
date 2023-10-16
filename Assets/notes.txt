@@ -81,4 +81,14 @@ notes.txt
             -> So... next step will involve creating new classes for each piece, which we will index through a function that returns a class instantiation?
                 -> i.e. GamePiece piece = someFunct(...);
 
+        3. I'm considering whether or not to refactor the ChessData memory to store references to chess pieces instead of bytes for each piece. I'm 
+            worried that the way we are currently handeling the ChessData elements is not going to scale well. It's performant to store this information
+            in 2 bytes of data, but I am worried that this technique is ultimately not worth the memory savings...
+                -> Not 100% sure of what I want to do with this yet.
+                -> We could alternatively write an algorithm that returns the gamePiece object that is at the specific index. We could then keep the more performant
+                data storing method.
+                    -> It appears that since the enum is actually an int underneath all of the fluff, we are possibly gaining no performance benefits...
+                    I'm somewhat confused as to how we are fitting all of these enums into our byte data. I feel like we should be overflowing the byte size..
+                        -> I think we may not have attempted to cast a value that has the firstMove bit set, so we are always within the size of a true byte...
+
             

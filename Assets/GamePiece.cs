@@ -57,6 +57,13 @@ namespace ChessClasses {
             Debug.Log("WARNING: Validate Move has not been implemented!");
             return false;
         }
+        public bool capturePiece(int endIndex) {
+            ChessData.setPieceData(endIndex, (byte)ChessPieceData.blank);
+            // TODO: We need to get the reference to the piece at this point and remove it from the game.
+
+            return true;
+        }
+
 
         public GamePiece(PieceColor color) {
             this.pieceColor = color;
