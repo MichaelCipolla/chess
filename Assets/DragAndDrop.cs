@@ -54,6 +54,8 @@ namespace ChessClasses {
             this.isGrabbed = false;
             ChessTile currentTile = getCurrentTile();
             if (currentTile == null || !this.gamePiece.validateMove(this.indexCache, currentTile.getIndex())) {
+                ChessData.setPieceData(this.indexCache, pieceCache);
+                ChessData.setGamePiece(this.indexCache, this.gamePiece);
                 transform.position = this.positionCache;
                 return;
             }
@@ -62,6 +64,7 @@ namespace ChessClasses {
             transform.position = new Vector3(currentTile.getGameObject().transform.position.x, currentTile.getGameObject().transform.position.y, clickHeight);
             int index = currentTile.getIndex();
             ChessData.setPieceData(index, pieceCache);
+            ChessData.setGamePiece(index, this.gamePiece);
             Debug.Log("Second index" + index.ToString());
             string pieceName = ChessData.getPieceName(pieceCache);
             byte lastPositionData = ChessData.getPieceData(this.indexCache);

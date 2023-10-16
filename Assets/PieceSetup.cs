@@ -28,7 +28,7 @@ namespace ChessClasses {
 
                 // TODO: We should execute capture logic here...
                 // Based on capture logic, we can further validate the move...
-                return false;
+                return true;
             }
 
             //if (endIndex >= startIndex + 7 && endIndex <= startIndex + 9) {
