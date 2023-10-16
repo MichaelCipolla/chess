@@ -89,12 +89,12 @@ namespace ChessClasses {
             return null;
         }
 
-        private GamePiece? getGamePieceByIndex(int index) {
-            ChessTile chessQuad = this.chessBoard.tileArray[index];
-            Collider2D collider = chessQuad.getGameObject().GetComponent<Collider2D>();
+        //private GamePiece? getGamePieceByIndex(int index) {
+        //    ChessTile chessQuad = this.chessBoard.tileArray[index];
+        //    Collider2D collider = chessQuad.getGameObject().GetComponent<Collider2D>();
 
-            return null;
-        }
+        //    return null;
+        //}
     }
 }
 

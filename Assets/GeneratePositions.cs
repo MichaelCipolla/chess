@@ -109,11 +109,14 @@ public class GeneratePositions : MonoBehaviour {
         // Add sprite...
         newPiece.controlInterface.chessBoard = chessBoardData;
         newPiece.spriteRenderer.sprite = currentPiece;
+
         // Update position...
         newPiece.scale = scale;
         newPiece.position = new Vector2(currentQuad, currentRank);
 
+        // Data init:
         ChessData.initializePieceData(currentQuad, currentPieceDatagram, pieceColor);
+        ChessData.registerGamePiece(currentQuad, newPiece);
 
         DragAndDrop movementScript = newPiece.gameObject.GetComponent<DragAndDrop>();
         movementScript.chessBoard = chessBoardData;

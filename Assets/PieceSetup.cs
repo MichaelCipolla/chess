@@ -21,12 +21,20 @@ namespace ChessClasses {
             byte pieceData = ChessData.getPieceData(endIndex);
 
             if(pieceData != (byte)ChessPieceData.blank) {
+                GamePiece pieceToDestroy = ChessData.getGamePiece(endIndex);
+                pieceToDestroy.gameObject.SetActive(false);
+                ChessData.setGamePiece(endIndex, null);
+                UnityEngine.Object.Destroy(pieceToDestroy.gameObject);
+
                 // TODO: We should execute capture logic here...
                 // Based on capture logic, we can further validate the move...
                 return false;
             }
 
-            if (endIndex >= startIndex + 7 && endIndex <= startIndex + 9) {
+            //if (endIndex >= startIndex + 7 && endIndex <= startIndex + 9) {
+            //    return true;
+            //}
+            if(endIndex == startIndex + 8) {
                 return true;
             }
             else {

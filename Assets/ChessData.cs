@@ -17,6 +17,7 @@ public static class ChessData {
     private const int FILE = 8;
 
     private static byte[] chessBoardDataMap = new byte[64];
+    private static GamePiece[] chessBoardGamePieceMap = new GamePiece[64];
 
     public static void generateBoardStruct() {
         // Generate an empty board.
@@ -38,9 +39,22 @@ public static class ChessData {
         chessBoardDataMap[index] = pieceData;
     }
 
+    public static void registerGamePiece(int index, GamePiece gamePiece) {
+        chessBoardGamePieceMap[index] = gamePiece;
+    }
+
+    public static GamePiece getGamePiece(int index) {
+        return chessBoardGamePieceMap[index];
+    }
+
+    public static void setGamePiece(int index, GamePiece? gamePiece) {
+        chessBoardGamePieceMap[index] = gamePiece;
+    }
+
     public static void setPieceData(int index, byte pieceType) {
         chessBoardDataMap[index] = pieceType;
     }
+
     public static byte getPieceData(int index) {
         return chessBoardDataMap[index];
     }
