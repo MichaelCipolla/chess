@@ -1,5 +1,7 @@
 namespace ChessClasses {
     class PawnPiece : GamePiece {
+        private bool firstMove = true;
+
         public PawnPiece(PieceColor color) : base(color) {
             
         }
@@ -19,27 +21,30 @@ namespace ChessClasses {
 
             // Collision check: 
             byte pieceData = ChessData.getPieceData(endIndex);
+            if(firstMove && endIndex == startIndex + 16 && pieceData == (byte)ChessPieceData.blank) {
+                firstMove = false;
+                return true;
+            }
 
-            if(pieceData != (byte)ChessPieceData.blank) {
-                GamePiece pieceToDestroy = ChessData.getGamePiece(endIndex);
-                pieceToDestroy.gameObject.SetActive(false);
-                ChessData.setGamePiece(endIndex, null);
-                UnityEngine.Object.Destroy(pieceToDestroy.gameObject);
+            if (endIndex == startIndex + 8 && pieceData == (byte)ChessPieceData.blank) {
+                firstMove = false;
+                return true;
+            }
 
+            if ((endIndex == startIndex + 7 || endIndex == startIndex + 9) && pieceData != (byte)ChessPieceData.blank) {
                 // TODO: We should execute capture logic here...
                 // Based on capture logic, we can further validate the move...
-                return true;
+                // We could further reduce the amount of if statements here through refactoring this capture logic into a method.
+                GamePiece pieceToDestroy = ChessData.getGamePiece(endIndex);
+                if (this.pieceColor != pieceToDestroy.pieceColor) {
+                    pieceToDestroy.gameObject.SetActive(false);
+                    ChessData.setGamePiece(endIndex, null);
+                    UnityEngine.Object.Destroy(pieceToDestroy.gameObject);
+                    firstMove = false;
+                    return true;
+                }
             }
-
-            //if (endIndex >= startIndex + 7 && endIndex <= startIndex + 9) {
-            //    return true;
-            //}
-            if(endIndex == startIndex + 8) {
-                return true;
-            }
-            else {
-                return false;
-            }
+            return false;
         }
     }
 

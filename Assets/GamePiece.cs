@@ -8,9 +8,11 @@ namespace ChessClasses {
     }
 
     public class GamePiece : IPieceBehavior {
-
         // TODO: These elements belong in the gamePiece class. Not the behavior interface.
-        protected PieceColor pieceColor;
+        public PieceColor pieceColor {
+            get;
+            protected set;
+        }
 
         public GameObject gameObject;
 
