@@ -1,9 +1,37 @@
+using MyBox;
+using System;
+using Unity.VisualScripting;
+
 namespace ChessClasses {
     class PawnPiece : GamePiece {
         private bool firstMove = true;
 
+        private int[] validMoveSet = null;
+
         public PawnPiece(PieceColor color) : base(color) {
-            
+            // TODO: I'm not super happy with how the mapping of valid moves turned out...
+            if (color == PieceColor.BLACK) {
+                this.validMoveSet = new int[] { 7, 8, 9 };
+            }
+            else {
+                this.validMoveSet = new int[] { -7, -8, -9 };
+            }
+        }
+
+        public override bool capturePiece(int startIndex, int endIndex) {
+            byte pieceData = ChessData.getPieceData(endIndex);
+
+            if ((endIndex == startIndex + this.validMoveSet[0] || endIndex == startIndex + this.validMoveSet[2]) && pieceData != (byte)ChessPieceData.blank) {
+                GamePiece pieceToDestroy = ChessData.getGamePiece(endIndex);
+                if (this.pieceColor != pieceToDestroy.pieceColor) {
+                    pieceToDestroy.gameObject.SetActive(false);
+                    ChessData.setGamePiece(endIndex, null);
+                    UnityEngine.Object.Destroy(pieceToDestroy.gameObject);
+                    firstMove = false;
+                    return true;
+                }
+            }
+            return false;
         }
         public override bool validateMove(int startIndex, int endIndex) {
             /* Here we will check if the requested move is valid.
@@ -19,49 +47,51 @@ namespace ChessClasses {
 
             */
 
-            // Collision check: 
             byte pieceData = ChessData.getPieceData(endIndex);
-            if(firstMove && endIndex == startIndex + 16 && pieceData == (byte)ChessPieceData.blank) {
-                firstMove = false;
-                return true;
-            }
-
-            if (endIndex == startIndex + 8 && pieceData == (byte)ChessPieceData.blank) {
-                firstMove = false;
-                return true;
-            }
-
-            if ((endIndex == startIndex + 7 || endIndex == startIndex + 9) && pieceData != (byte)ChessPieceData.blank) {
-                // TODO: We should execute capture logic here...
-                // Based on capture logic, we can further validate the move...
-                // We could further reduce the amount of if statements here through refactoring this capture logic into a method.
-                GamePiece pieceToDestroy = ChessData.getGamePiece(endIndex);
-                if (this.pieceColor != pieceToDestroy.pieceColor) {
-                    pieceToDestroy.gameObject.SetActive(false);
-                    ChessData.setGamePiece(endIndex, null);
-                    UnityEngine.Object.Destroy(pieceToDestroy.gameObject);
+            if(pieceData == (byte)ChessPieceData.blank) {
+                if (firstMove && endIndex == startIndex + 2 * this.validMoveSet[1]) {
+                    firstMove = false;
+                    return true;
+                }
+                else if (endIndex == startIndex + this.validMoveSet[1]) {
                     firstMove = false;
                     return true;
                 }
             }
+            else {
+                return this.capturePiece(startIndex, endIndex);
+            }
+
             return false;
         }
     }
 
     class KnightPiece : GamePiece {
+        private int[] validMoveSet = null;
         public KnightPiece(PieceColor color) : base(color) {
+            this.validMoveSet = new[] { 6, 10, 15, 17 };
+        }
 
+        public override bool capturePiece(int startIndex, int endIndex) {
+            GamePiece pieceToDestroy = ChessData.getGamePiece(endIndex);
+            if (this.pieceColor != pieceToDestroy.pieceColor) {
+                pieceToDestroy.gameObject.SetActive(false);
+                ChessData.setGamePiece(endIndex, null);
+                UnityEngine.Object.Destroy(pieceToDestroy.gameObject);
+                return true;
+            }
+            return false;
         }
         public override bool validateMove(int startIndex, int endIndex) {
             byte pieceData = ChessData.getPieceData(endIndex);
-
-            if (pieceData != (byte)ChessPieceData.blank) {
-                // We should execute capture logic here...
-                // Based on capture logic, we can further validate the move...
-                return false;
+            int amountMoved = endIndex - startIndex;
+            if (this.validMoveSet.IndexOfItem(Math.Abs(amountMoved)) != -1) {
+                if (pieceData != (byte)ChessPieceData.blank) {
+                    return capturePiece(startIndex, endIndex);
+                }
+                return true;
             }
-            // Here we will check if the requested move is valid.
-            return true;
+            return false;
         }
     }
 

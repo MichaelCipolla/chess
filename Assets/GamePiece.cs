@@ -59,10 +59,9 @@ namespace ChessClasses {
             Debug.Log("WARNING: Validate Move has not been implemented!");
             return false;
         }
-        public bool capturePiece(int endIndex) {
-            ChessData.setPieceData(endIndex, (byte)ChessPieceData.blank);
-            // TODO: We need to get the reference to the piece at this point and remove it from the game.
-
+        public virtual bool capturePiece(int startIndex, int endIndex) {
+            // TODO: Maybe we should implement scoring here?
+            Debug.Log("WARNING: Capture Piece has not been implemented!");
             return true;
         }
 

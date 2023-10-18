@@ -10,6 +10,6 @@ public interface IPieceBehavior {
     /// removing that piece from the game board.
     /// </summary>
     /// <returns>bool indicating the validity of the move.</returns>
-    public abstract bool capturePiece(int endIndex);
+    public abstract bool capturePiece(int startIndex, int endIndex);
 
 }
