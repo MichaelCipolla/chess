@@ -130,11 +130,38 @@ namespace ChessClasses {
     }
 
     class QueenPiece : GamePiece {
-        public QueenPiece(PieceColor color) : base(color) {
+        private int[] validMoveSet = null;
 
+        public QueenPiece(PieceColor color) : base(color) {
+            this.validMoveSet = new[] { 7, 8, 9 }; 
         }
+        public override bool capturePiece(int startIndex, int endIndex) {
+            GamePiece pieceToDestroy = ChessData.getGamePiece(endIndex);
+            if (this.pieceColor != pieceToDestroy.pieceColor) {
+                pieceToDestroy.gameObject.SetActive(false);
+                ChessData.setGamePiece(endIndex, null);
+                UnityEngine.Object.Destroy(pieceToDestroy.gameObject);
+                return true;
+            }
+            return false;
+        }
+
         public override bool validateMove(int startIndex, int endIndex) {
             byte pieceData = ChessData.getPieceData(endIndex);
+
+            int moveAmount = endIndex - startIndex;
+            int rank = startIndex % 8;
+            int minRank = rank;
+            int maxRank = 7 - rank;
+            if (moveAmount >= -minRank && moveAmount <= maxRank) {
+                return true;
+            }
+
+            foreach (int move in validMoveSet) {
+                if(Math.Abs(moveAmount) % move == 0) {
+                    return true;
+                } 
+            }
 
             if (pieceData != (byte)ChessPieceData.blank) {
                 // We should execute capture logic here...
@@ -142,8 +169,9 @@ namespace ChessClasses {
                 return false;
             }
             // Here we will check if the requested move is valid.
-            return true;
+            return false;
         }
+
     }
 
     class KingPiece : GamePiece {
