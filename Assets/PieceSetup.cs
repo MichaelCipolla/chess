@@ -172,13 +172,20 @@ namespace ChessClasses {
                     else {
                         index++;
                     }
+                    if(index == endIndex) {
+                        break;
+                    }
                     // Debug.Log("QUEEN: " + index);
                     if(ChessData.getPieceData(index) != (byte)ChessPieceData.blank) {
                         return false;
                     }
                 }
                 Debug.Log("HORIZONTAL TRUE");
-                return true;
+                if (pieceData != (byte)ChessPieceData.blank) {
+                    // We should execute capture logic here...
+                    // Based on capture logic, we can further validate the move...
+                    return this.capturePiece(startIndex, endIndex);
+                }
             }
             // if (moveAmount >= -minFile && moveAmount <= maxFile) {
             //     return true;
@@ -214,7 +221,7 @@ namespace ChessClasses {
                         for (int i = 1; i <= boundary; i++) {
                             int nextIndex = startIndex + move * i;
                             Debug.Log("QUEEN great: " + nextIndex);
-                            if (nextIndex > endIndex) {
+                            if (nextIndex >= endIndex) {
                                 break;
                             }
                             
@@ -227,7 +234,7 @@ namespace ChessClasses {
                         for (int i = 1; i <= boundary; i++) {
                             int nextIndex = startIndex + move * -i;
                             Debug.Log("QUEEN forEach: " + nextIndex);
-                            if(nextIndex < endIndex) {
+                            if(nextIndex <= endIndex) {
                                 Debug.Log("QUEEN break!" + nextIndex);
                                 break;
                             }
@@ -239,17 +246,14 @@ namespace ChessClasses {
                             Debug.Log("QUEEN fin!" + nextIndex);
                         }
                     }
-                    return true;
+                    if (pieceData != (byte)ChessPieceData.blank) {
+                        // We should execute capture logic here...
+                        // Based on capture logic, we can further validate the move...
+                        return this.capturePiece(startIndex, endIndex);
+                    }
                 } 
             }
-
-            if (pieceData != (byte)ChessPieceData.blank) {
-                // We should execute capture logic here...
-                // Based on capture logic, we can further validate the move...
-                return false;
-            }
-            // Here we will check if the requested move is valid.
-            return false;
+            return true;
         }
 
     }
