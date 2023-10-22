@@ -92,3 +92,42 @@ notes.txt
                         -> I think we may not have attempted to cast a value that has the firstMove bit set, so we are always within the size of a true byte...
 
             
+        4. I may have given up on the idea of using the model view controller technique with byte codes for each piece too early. We could have potentially raised 
+        the amount from 1 byte per matrix to 2 bytes per matrix index. That would have allowed me to keep the light weight nature of my original attempt intact.
+
+        5. Talked to my Dad about the benefit of using specifications / requirements writing. This could help me define the intended architecture of my game in a way
+        that would allow someone like Chris to step in and start developing easier.
+
+    [7, 15, 23, 31, 39, 47, 55, 63] -> A file
+ 
+ [0, 8, 16, 24, 32, 40, 48, 56] -> H file
+
+    At these indices we are at an edge case. Wrt the A file, we cannot continue to add
+    9 (or subtract 6), and wrt the H file we cannot continue to add 6 (or subtract 9)
+
+        What if instead we set the index to be equal to the remaining amount of the file?
+
+        Bug: We are using minRank when we are going negative to the right, and we are using 
+        maxRank when we are going positive to the left. This creates undefined behavior.
+
+        Queen is a nightmare. Poorly designed in general. Needs refactoring.
+
+        Problem: It appears like we are not recognizing that there is a piece at index 14... I had previously moved my piece over that amount, perhaps it became captured????
+            (That's the bug....)
+                Up down data is not being handled by this portion of the code... 
+        We would need to figure out how many 8 multiple ranks away we are from a negative number.
+            i.e. if we are at index 10, we are 1 multiple of 8 away from 0, and 6 multiples of 8 away from the overflow threshold...
+                -> How do we determine this in a performant way?
+                    -> Bruteforce? Subtract multiples of 8 until we reach a threshold.
+                        -> Divide and floor
+                            -> Math.floor(10 / 8) -> 1
+                            -> Math.floor(6 / 8) -> 0
+                                -> Then, to check the opposite, we subtract the minimum from 7.
+                                    -> numberOfMovesBelow = Math.floor(startIndex / numOfRanks);
+                                    -> numberOfMovesAbove = 7 - numberOfMovesBelow;
+
+                        We could save the fenData in a destructor call and then load it from a fenFile of some kind
+                            We could then load and save games between game states.
+
+                            
+
