@@ -147,6 +147,49 @@ namespace ChessClasses {
             return false;
         }
 
+        public bool horizontalMove(int startIndex, int endIndex, int moveAmount, byte pieceData) {
+            int index = startIndex;
+            for(int i = 0; i < Math.Abs(moveAmount); i++) {
+                index += startIndex > endIndex ? -1 : 1; 
+
+                if(index == endIndex) {
+                    break;
+                }
+                
+                if(ChessData.getPieceData(index) != (byte)ChessPieceData.blank) {
+                    return false;
+                }
+            }
+            if (pieceData != (byte)ChessPieceData.blank) {
+                // We should execute capture logic here...
+                // Based on capture logic, we can further validate the move...
+                return this.capturePiece(startIndex, endIndex);
+            }
+            return true;
+        }
+
+        public bool diagonalMove(int startIndex, int endIndex, int moveAmount, int move, int boundary, byte pieceData) {
+            for (int i = 1; i <= boundary; i++) {
+                int moveDirection = endIndex > startIndex ? 1 : -1;
+                int nextIndex = startIndex + move * i * moveDirection;
+                
+                if (nextIndex == endIndex) {
+                    break;
+                }
+
+                if (ChessData.getPieceData(nextIndex) != (byte)ChessPieceData.blank) {
+                    return false;
+                }
+            }
+            
+            if (pieceData != (byte)ChessPieceData.blank) {
+                // We should execute capture logic here...
+                // Based on capture logic, we can further validate the move...
+                return this.capturePiece(startIndex, endIndex);
+            }
+            return true;
+        }
+
         public override bool validateMove(int startIndex, int endIndex) {
             byte pieceData = ChessData.getPieceData(endIndex);
 
@@ -164,35 +207,10 @@ namespace ChessClasses {
             
             // Check if the piece is in the horizontal bounds...
             if (moveAmount >= -minFile && moveAmount <= maxFile) {
-                int index = startIndex;
-                for(int i = 0; i < Math.Abs(moveAmount); i++) {
-                    if(startIndex > endIndex) {
-                        index--;
-                    }
-                    else {
-                        index++;
-                    }
-                    if(index == endIndex) {
-                        break;
-                    }
-                    // Debug.Log("QUEEN: " + index);
-                    if(ChessData.getPieceData(index) != (byte)ChessPieceData.blank) {
-                        return false;
-                    }
-                }
-                Debug.Log("HORIZONTAL TRUE");
-                if (pieceData != (byte)ChessPieceData.blank) {
-                    // We should execute capture logic here...
-                    // Based on capture logic, we can further validate the move...
-                    return this.capturePiece(startIndex, endIndex);
-                }
+                return this.horizontalMove(startIndex, endIndex, moveAmount, pieceData);
             }
-            // if (moveAmount >= -minFile && moveAmount <= maxFile) {
-            //     return true;
-            // }
-            Debug.Log("Validating: Move amount: " + moveAmount);
+
             foreach (int move in validMoveSet) {
-                Debug.Log("Validating: move: " + move);
                 if (Math.Abs(moveAmount) % move == 0) {
                     // Find all multiples, negative or positive:
                     // Check startIndex + (move * i)
@@ -201,61 +219,23 @@ namespace ChessClasses {
                     int boundary = 0;
                     if (validMove == 7 || validMove == -9) {
                         boundary = minFile;
-                        Debug.Log("Validating minFile: " + boundary);
                     }
-                    else if(validMove == 9 || validMove == -7) {
+                    else if (validMove == 9 || validMove == -7) {
                         boundary = maxFile;
-                        Debug.Log("Validating maxFile: " + boundary);
                     }
                     else { // In this condition we handle the +-8 movement
-                        if(endIndex > startIndex) {
-                            boundary = maxRank; // anything above 60 is invalid. Anything below 0 is invalid.
+                        if (endIndex > startIndex) {
+                            boundary = maxRank; // anything above 63 is invalid. Anything below 0 is invalid.
                         }
                         else {
                             boundary = minRank;
                         }
                     }
-                    
-                    
-                    if (endIndex > startIndex) {
-                        for (int i = 1; i <= boundary; i++) {
-                            int nextIndex = startIndex + move * i;
-                            Debug.Log("QUEEN great: " + nextIndex);
-                            if (nextIndex >= endIndex) {
-                                break;
-                            }
-                            
-                            if (ChessData.getPieceData(nextIndex) != (byte)ChessPieceData.blank) {
-                                return false;
-                            }
-                        }
-                    }
-                    else {
-                        for (int i = 1; i <= boundary; i++) {
-                            int nextIndex = startIndex + move * -i;
-                            Debug.Log("QUEEN forEach: " + nextIndex);
-                            if(nextIndex <= endIndex) {
-                                Debug.Log("QUEEN break!" + nextIndex);
-                                break;
-                            }
-                            
-                            if(ChessData.getPieceData(nextIndex) != (byte)ChessPieceData.blank) {
-                                Debug.Log("QUEEN occupied!" + nextIndex);
-                                return false;
-                            }
-                            Debug.Log("QUEEN fin!" + nextIndex);
-                        }
-                    }
-                    if (pieceData != (byte)ChessPieceData.blank) {
-                        // We should execute capture logic here...
-                        // Based on capture logic, we can further validate the move...
-                        return this.capturePiece(startIndex, endIndex);
-                    }
-                } 
+                    return this.diagonalMove(startIndex, endIndex, moveAmount, move, boundary, pieceData);
+                }
             }
-            return true;
+            return false;
         }
-
     }
 
     class KingPiece : GamePiece {
